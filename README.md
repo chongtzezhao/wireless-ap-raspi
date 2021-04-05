@@ -14,7 +14,8 @@ sudo nano /etc/netplan/50-cloud-init.yaml
       optional: true
       access-points:
         "mallab-Precision-7820-Tower":
-          password: "YowLEMSw"```
+          password: "YowLEMSw"
+```
 		  
 sudo netplan --debug apply
 
