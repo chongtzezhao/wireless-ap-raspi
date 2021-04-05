@@ -1,8 +1,13 @@
-Connect to wifi internet
+This is the process for creating a wireless access point on a raspberry pi.
 
-sudo nano /etc/netplan/50-cloud-init.yaml
 
-```network:
+## Step 0: Connecting to Wifi
+**Skip this if you have an ethernet connection**
+We need to edit the network config file
+`sudo nano /etc/netplan/50-cloud-init.yaml`
+and type and this
+```
+network:
   version: 2
   ethernets:
     eth0:
@@ -13,28 +18,33 @@ sudo nano /etc/netplan/50-cloud-init.yaml
       dhcp4: true
       optional: true
       access-points:
-        "mallab-Precision-7820-Tower":
-          password: "YowLEMSw"
+        "YOUR WIFI SSID":
+          password: "YOURWIFIPASSWORD"
 ```
-		  
-sudo netplan --debug apply
+connect to the wifi
+`sudo netplan --debug apply`
 
-networkctl
-3 wlan0 wlan routable configured
+check if the connection has been established
+`networkctl`
+Output should look something like this:
+```3 wlan0 wlan routable configured```
 
+## Step 1: Installing the packages
+```
 sudo apt update
 sudo apt install hostapd dnsmasq
-
-CACHE LOCK
-sudo lsof /var/lib/dpkg/lock
+```
+## Step 1.1: hostapd
+### ERROR: CACHE LOCK
+`sudo lsof /var/lib/dpkg/lock`
 find PID and kill
-sudo kill -9 $PID
-
-
+`sudo kill -9 $PID`
 HOSTAPD - if "Job for hostapd service failed", then kill systemd
 
-sudo nano /etc/hostapd/hostapd.conf
 
+`sudo nano /etc/hostapd/hostapd.conf`
+
+```
 interface=wlan0
 driver=nl80211
 ssid=MyHotspot
@@ -49,59 +59,84 @@ wpa_passphrase=12345678
 wpa_key_mgmt=WPA-PSK
 wpa_pairwise=TKIP
 rsn_pairwise=CCMP
+```
 
-
+set the daemon for the hostapd service
+```
 sudo nano /etc/default/hostapd
-DAEMON_CONF="/etc/hostapd/hostapd.conf"	
+DAEMON_CONF="/etc/hostapd/hostapd.conf"
+```
 
+restart hostapd
+
+```
 sudo systemctl unmask hostapd
 sudo systemctl enable hostapd
 sudo systemctl start hostapd
+```
 
-
-sudo apt-get install dnsmasq
-
-ERROR: failed to create listening socket for port 53: Address already in use
-FIX: sudo ss -lp "sport = :domain"
-sudo systemctl disable systemd-resolved
-sudo systemctl mask systemd-resolved
-
+### Step 1.2: dnsmasq
+```
 sudo cp /etc/dnsmasq.conf /etc/dnsmasq.conf.old
 sudo nano /etc/dnsmasq.conf
+```
+inside /etc/dnsmasq.conf:
+```
 interface=wlan0
 dhcp-range=192.168.4.2,192.168.4.20,255.255.255.0,24h
+```
+start dnsmasq
 
+`sudo systemctl start dnsmasq`
 
-sudo systemctl start dnsmasq
-
-ERROR: unable to resolve host ubuntu: Temporary failure in name resolution
-FIX:
-sudo nano /etc/hosts
-add: 127.0.0.1 $hostname
-hostname can be found in cat /etc/hostname
-
-
-sudo nano /lib/systemd/system/dnsmasq.service
+`sudo nano /lib/systemd/system/dnsmasq.service`
+inside:
+```
 [Unit]
 ...
 After=network-online.target
 Wants=network-online.target
+```
+remember `/etc/netplan/50-cloud-init.yaml`?
 
+remove the "wifis" section and add the following under the "ethernets" section
+```
     wlan0:
       dhcp4: false
       addresses:
       - 192.168.4.1/24
-	  
+```
+Make sure to indent it properly!
 	  
 sudo reboot
 
+## ERRORS
+
+ERROR: failed to create listening socket for port 53: Address already in use
+FIX: `sudo ss -lp "sport = :domain"`
+the problem will most likely be systemd
+```
+sudo systemctl disable systemd-resolved
+sudo systemctl mask systemd-resolved
+```
+
+
+ERROR: unable to resolve host ubuntu: Temporary failure in name resolution
+FIX:
+```
+sudo nano /etc/hosts
+```
+add `127.0.0.1 $hostname` into file
+hostname can be found using `cat /etc/hostname`
+
+
 ERROR: directory /etc/resolv.conf for resolv-file is missing, cannot poll
 FAILED to start up
-FIX: sudo rm -f /etc/resolv.conf
+FIX: 
+```
+sudo rm -f /etc/resolv.conf
 sudo nano /etc/resolv.conf
 nameserver 8.8.8.8
-
-
-
+```
 
 https://askubuntu.com/questions/91543/apt-get-update-fails-to-fetch-files-temporary-failure-resolving-error#91595
