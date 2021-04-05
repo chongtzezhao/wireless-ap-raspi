@@ -1,7 +1,3 @@
-# wireless-ap-raspi
-Setting up wireless access point on Ubuntu Server on Raspberry Pi
-
-
 Connect to wifi internet
 
 sudo nano /etc/netplan/50-cloud-init.yaml
@@ -65,12 +61,12 @@ sudo systemctl start hostapd
 sudo apt-get install dnsmasq
 
 ERROR: failed to create listening socket for port 53: Address already in use
-sudo ss -lp "sport = :domain"
+FIX: sudo ss -lp "sport = :domain"
 sudo systemctl disable systemd-resolved
 sudo systemctl mask systemd-resolved
 
 sudo cp /etc/dnsmasq.conf /etc/dnsmasq.conf.old
-sudo vi /etc/dnsmasq.conf
+sudo nano /etc/dnsmasq.conf
 interface=wlan0
 dhcp-range=192.168.4.2,192.168.4.20,255.255.255.0,24h
 
@@ -78,13 +74,13 @@ dhcp-range=192.168.4.2,192.168.4.20,255.255.255.0,24h
 sudo systemctl start dnsmasq
 
 ERROR: unable to resolve host ubuntu: Temporary failure in name resolution
+FIX:
 sudo nano /etc/hosts
-
 add: 127.0.0.1 $hostname
 hostname can be found in cat /etc/hostname
 
 
-sudo vi /lib/systemd/system/dnsmasq.service
+sudo nano /lib/systemd/system/dnsmasq.service
 [Unit]
 ...
 After=network-online.target
@@ -98,4 +94,13 @@ Wants=network-online.target
 	  
 sudo reboot
 
+ERROR: directory /etc/resolv.conf for resolv-file is missing, cannot poll
+FAILED to start up
+FIX: sudo rm -f /etc/resolv.conf
+sudo nano /etc/resolv.conf
+nameserver 8.8.8.8
 
+
+
+
+https://askubuntu.com/questions/91543/apt-get-update-fails-to-fetch-files-temporary-failure-resolving-error#91595
