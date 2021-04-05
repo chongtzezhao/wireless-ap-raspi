@@ -2,7 +2,7 @@ Connect to wifi internet
 
 sudo nano /etc/netplan/50-cloud-init.yaml
 
-network:
+```network:
   version: 2
   ethernets:
     eth0:
@@ -14,7 +14,7 @@ network:
       optional: true
       access-points:
         "mallab-Precision-7820-Tower":
-          password: "YowLEMSw"
+          password: "YowLEMSw"```
 		  
 sudo netplan --debug apply
 
