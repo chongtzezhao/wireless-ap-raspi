@@ -104,6 +104,20 @@ remove the "wifis" section and add the following under the "ethernets" section
       - 192.168.4.1/24
 ```
 Make sure to indent it properly!
+
+It should look something like this
+```
+network:
+  version: 2
+  ethernets:
+    eth0:
+      dhcp4: true
+      optional: true
+    wlan0:
+      dhcp4: false
+      addresses:
+      - 192.168.4.1/24
+```
 	  
 sudo reboot
 
