@@ -168,7 +168,9 @@ FIX:
 ```
 sudo nano /etc/hosts
 ```
-add `127.0.0.1 $hostname` into file
+add `127.0.0.1 $hostname` into file.
+
+
 hostname can be found using `cat /etc/hostname`
 
 
