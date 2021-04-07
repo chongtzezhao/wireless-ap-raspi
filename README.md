@@ -99,7 +99,10 @@ Next, start dnsmasq
 
 `sudo systemctl start dnsmasq`
 
+To ensure that dnsmasq starts properly on every time the rpi is rebooted, we need to change the service config file
+
 `sudo nano /lib/systemd/system/dnsmasq.service`
+
 inside:
 ```
 [Unit]
