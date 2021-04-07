@@ -110,13 +110,22 @@ sudo reboot
 ## ERRORS
 
 ### ERROR: CACHE LOCK
+show running services
+
 `sudo lsof /var/lib/dpkg/lock`
+
+
 find PID and kill
-`sudo kill -9 $PID`
+
+
+`sudo kill -9 $PID`, where $PID is the PID of the service
+
+
 HOSTAPD - if "Job for hostapd service failed", then kill systemd
 
 ### ERROR: failed to create listening socket for port 53: Address already in use
 FIX: `sudo ss -lp "sport = :domain"`
+
 the problem will most likely be systemd
 ```
 sudo systemctl disable systemd-resolved
@@ -141,5 +150,7 @@ sudo rm -f /etc/resolv.conf
 sudo nano /etc/resolv.conf
 nameserver 8.8.8.8
 ```
+
+Trivia: 8.8.8.8 is Google's DNS
 
 https://askubuntu.com/questions/91543/apt-get-update-fails-to-fetch-files-temporary-failure-resolving-error#91595
