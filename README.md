@@ -81,16 +81,21 @@ sudo systemctl start hostapd
 ```
 
 ### Step 1.2: dnsmasq
+
+Create a backup of the file and edit the new one:
+
 ```
 sudo cp /etc/dnsmasq.conf /etc/dnsmasq.conf.old
 sudo nano /etc/dnsmasq.conf
 ```
-inside /etc/dnsmasq.conf:
+inside /etc/dnsmasq.conf, add the following:
+
 ```
 interface=wlan0
 dhcp-range=192.168.4.2,192.168.4.20,255.255.255.0,24h
 ```
-start dnsmasq
+
+Next, start dnsmasq
 
 `sudo systemctl start dnsmasq`
 
