@@ -1,6 +1,6 @@
 This is the process for creating a wireless access point on a raspberry pi.
 
-#### If you encounter errors at any point, please refer to the [section](##ERRORS) at the bottom
+#### If you encounter errors at any point, please refer to the [section](#ERRORS) at the bottom
 
 ## Step 0: Connecting to Wifi
 **Skip this if you have an ethernet connection**
