@@ -1,5 +1,6 @@
 This is the process for creating a wireless access point on a raspberry pi.
 
+#### If you encounter errors at any point, please refer to the (section)[##ERRORS] at the bottom
 
 ## Step 0: Connecting to Wifi
 **Skip this if you have an ethernet connection**
@@ -21,11 +22,13 @@ network:
         "YOUR WIFI SSID":
           password: "YOURWIFIPASSWORD"
 ```
-connect to the wifi
+connect to the wifi - 
 `sudo netplan --debug apply`
 
-check if the connection has been established
+check if the connection has been established using
 `networkctl`
+
+
 Output should look something like this:
 ```3 wlan0 wlan routable configured```
 
@@ -34,16 +37,10 @@ Output should look something like this:
 sudo apt update
 sudo apt install hostapd dnsmasq
 ```
-## Step 1.1: hostapd
-### ERROR: CACHE LOCK
-`sudo lsof /var/lib/dpkg/lock`
-find PID and kill
-`sudo kill -9 $PID`
-HOSTAPD - if "Job for hostapd service failed", then kill systemd
-
-
+### Step 1.1: hostapd
+Edit/create the config file
 `sudo nano /etc/hostapd/hostapd.conf`
-
+and input the following
 ```
 interface=wlan0
 driver=nl80211
@@ -112,7 +109,13 @@ sudo reboot
 
 ## ERRORS
 
-ERROR: failed to create listening socket for port 53: Address already in use
+### ERROR: CACHE LOCK
+`sudo lsof /var/lib/dpkg/lock`
+find PID and kill
+`sudo kill -9 $PID`
+HOSTAPD - if "Job for hostapd service failed", then kill systemd
+
+### ERROR: failed to create listening socket for port 53: Address already in use
 FIX: `sudo ss -lp "sport = :domain"`
 the problem will most likely be systemd
 ```
@@ -121,7 +124,7 @@ sudo systemctl mask systemd-resolved
 ```
 
 
-ERROR: unable to resolve host ubuntu: Temporary failure in name resolution
+### ERROR: unable to resolve host ubuntu: Temporary failure in name resolution
 FIX:
 ```
 sudo nano /etc/hosts
@@ -130,7 +133,7 @@ add `127.0.0.1 $hostname` into file
 hostname can be found using `cat /etc/hostname`
 
 
-ERROR: directory /etc/resolv.conf for resolv-file is missing, cannot poll
+### ERROR: directory /etc/resolv.conf for resolv-file is missing, cannot poll
 FAILED to start up
 FIX: 
 ```
