@@ -176,6 +176,7 @@ hostname can be found using `cat /etc/hostname`
 
 ### ERROR: directory /etc/resolv.conf for resolv-file is missing, cannot poll
 FAILED to start up
+
 FIX: 
 ```
 sudo rm -f /etc/resolv.conf
