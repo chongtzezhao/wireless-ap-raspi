@@ -7,7 +7,8 @@ This is the process for creating a wireless access point on a raspberry pi.
 
 We need to edit the network config file
 
-```sudo nano /etc/netplan/50-cloud-init.yaml
+```
+sudo nano /etc/netplan/50-cloud-init.yaml
 ```
 
 and type and this
