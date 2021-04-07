@@ -35,7 +35,10 @@ check if the connection has been established using
 
 
 Output should look something like this:
+
 ```3 wlan0 wlan routable configured```
+
+Note the keywords "routable" and "configured".
 
 ## Step 1: Installing the packages
 ```
