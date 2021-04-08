@@ -198,3 +198,9 @@ nameserver 8.8.8.8
 Trivia: 8.8.8.8 is Google's DNS
 
 https://askubuntu.com/questions/91543/apt-get-update-fails-to-fetch-files-temporary-failure-resolving-error#91595
+
+
+## Additional steps (optional)
+```
+sudo apt install net-tools
+```
