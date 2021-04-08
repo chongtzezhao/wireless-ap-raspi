@@ -66,6 +66,8 @@ wpa_pairwise=TKIP
 rsn_pairwise=CCMP
 ```
 
+**NOTE: driver is "nl..."("NL...") NOT "n1..."**
+
 set the daemon for the hostapd service
 ```
 sudo nano /etc/default/hostapd
