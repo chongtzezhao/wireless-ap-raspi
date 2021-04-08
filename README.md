@@ -2,6 +2,8 @@ This is the process for creating a wireless access point on a raspberry pi.
 
 #### If you encounter errors at any point, please refer to the [section](#ERRORS) at the bottom
 
+# [IMPT] NOTE: REMEMBER TO REBOOT AFTER EACH MAIN STEP
+
 ## Step 0: Connecting to Wifi
 **Skip this if you have an ethernet connection**
 
@@ -50,7 +52,7 @@ sudo reboot
 sudo apt update
 sudo apt install hostapd dnsmasq
 ```
-### Step 1.1: hostapd
+## Step 2: hostapd
 Edit/create the config file
 `sudo nano /etc/hostapd/hostapd.conf`
 and input the following
@@ -87,7 +89,7 @@ sudo systemctl enable hostapd
 sudo systemctl start hostapd
 ```
 
-### Step 1.2: dnsmasq
+## Step 3: dnsmasq
 
 Create a backup of the file and edit the new one:
 
@@ -117,6 +119,8 @@ inside:
 After=network-online.target
 Wants=network-online.target
 ```
+
+## Step 4: Reconfiguring the access point from client to host
 remember `/etc/netplan/50-cloud-init.yaml`?
 
 remove the "wifis" section and add the following under the "ethernets" section
