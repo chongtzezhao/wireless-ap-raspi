@@ -40,6 +40,11 @@ Output should look something like this:
 
 Note the keywords "routable" and "configured".
 
+remember to reboot before moving on!
+```
+sudo reboot
+```
+
 ## Step 1: Installing the packages
 ```
 sudo apt update
