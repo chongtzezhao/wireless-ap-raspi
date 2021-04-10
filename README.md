@@ -2,7 +2,7 @@ This is the process for creating a wireless access point on a raspberry pi.
 
 #### If you encounter errors at any point, please refer to the [section](#ERRORS) at the bottom
 
-# [IMPT] NOTE: REMEMBER TO REBOOT AFTER EACH MAIN STEP
+# [IMPT] REMEMBER TO REBOOT AFTER EACH MAIN STEP
 
 ## Step 0: Connecting to Wifi
 **Skip this if you have an ethernet connection**
@@ -126,7 +126,8 @@ remember `/etc/netplan/50-cloud-init.yaml`?
 remove the "wifis" section and add the following under the "ethernets" section
 ```
     wlan0:
-      dhcp4: false
+      dhcp4: true
+      optional: true
       addresses:
       - 192.168.4.1/24
 ```
@@ -141,7 +142,8 @@ network:
       dhcp4: true
       optional: true
     wlan0:
-      dhcp4: false
+      dhcp: true
+      optional: true
       addresses:
       - 192.168.4.1/24
 ```
