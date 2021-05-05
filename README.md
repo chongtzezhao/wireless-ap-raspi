@@ -217,3 +217,5 @@ sudo apt install net-tools
 [camera module not getting detected](https://raspberrypi.stackexchange.com/questions/81753/camera-module-not-getting-detected#81775)
 
 [unsolved](https://www.raspberrypi.org/forums/viewtopic.php?p=1445300)
+
+[getting raspi-config on ubuntu server](https://raspberrypi.stackexchange.com/questions/111728/how-to-get-raspi-config-on-ubuntu-20-04#111729)
