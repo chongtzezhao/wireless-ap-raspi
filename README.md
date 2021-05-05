@@ -214,6 +214,6 @@ sudo apt install net-tools
 
 [no desktop variant](https://askubuntu.com/questions/1334608/ubuntu-20-04-32-bit)
 
-[camera module not gettign detected](https://raspberrypi.stackexchange.com/questions/81753/camera-module-not-getting-detected#81775)
+[camera module not getting detected](https://raspberrypi.stackexchange.com/questions/81753/camera-module-not-getting-detected#81775)
 
 [unsolved](https://www.raspberrypi.org/forums/viewtopic.php?p=1445300)
