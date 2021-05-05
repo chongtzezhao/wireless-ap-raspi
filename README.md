@@ -206,3 +206,11 @@ https://askubuntu.com/questions/91543/apt-get-update-fails-to-fetch-files-tempor
 ```
 sudo apt install net-tools
 ```
+
+
+
+# Links
+[switch to 32-bit](https://askubuntu.com/questions/1250230/how-to-run-a-pi-camera-on-raspberry-pi-4-running-ubuntu-focal)
+[no desktop variant](https://askubuntu.com/questions/1334608/ubuntu-20-04-32-bit)
+[camera module not gettign detected](https://raspberrypi.stackexchange.com/questions/81753/camera-module-not-getting-detected#81775)
+[unsolved](https://www.raspberrypi.org/forums/viewtopic.php?p=1445300)
